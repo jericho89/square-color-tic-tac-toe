@@ -14,7 +14,7 @@ namespace mots{
 		public:
 		static const enum Owner {Player, Computer, Nobody};
 		//constructor: choose baseColor -- the "true" color of the game board -- and the sounds associated with this space
-			Tile(sf::Color baseColor, std::string redSound, std::string greenSound);
+			Tile(sf::Color baseColor);
 
 		//functions to manage the color and transparency of sf::RectangleShape tileFace. Changes are gradual over the period time (seconds)
 			// don't know how to do this yet, so I'm just wrapping setFillColor while I work on other things
@@ -44,8 +44,6 @@ namespace mots{
 		sf::Color targetColor;
 		Owner owner;
 		sf::RectangleShape tileFace;
-		std::string redSoundFile;
-		std::string greenSoundFile;
 		
 
 	};

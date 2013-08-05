@@ -5,16 +5,13 @@
 //and is implemented in terms of an sf::RectangleShape
 
 //constructor: choose base color and sounds; Owner defaults to Nobody, color defaults to black
-mots::Tile::Tile(sf::Color baseColor, std::string redSound, std::string greenSound)
+mots::Tile::Tile(sf::Color baseColor)
 {
 	//set default member values
 	owner = Nobody;
 	originalColor = baseColor;
 	targetColor = originalColor;
 
-	//set values based on function parameters
-	redSoundFile = redSound;
-	greenSoundFile = greenSound;
 
 	//initialize the tileFace
 	tileFace = sf::RectangleShape(sf::Vector2f(200.00, 200.00));

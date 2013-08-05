@@ -6,17 +6,17 @@
 mots::GameBoard::GameBoard(){
 	//build the game board vector and initialize all 9 tiles
 
-	nineTiles.push_back(mots::Tile(mots::tileGrey, "r1", "g1"));
-	nineTiles.push_back(mots::Tile(sf::Color::White, "r2", "g2"));
-	nineTiles.push_back(mots::Tile(mots::tileGrey, "r3", "g3"));
+	nineTiles.push_back(mots::Tile(mots::tileGrey));
+	nineTiles.push_back(mots::Tile(sf::Color::White));
+	nineTiles.push_back(mots::Tile(mots::tileGrey));
 
-	nineTiles.push_back(mots::Tile(sf::Color::White, "r4", "g4"));
-	nineTiles.push_back(mots::Tile(mots::tileGrey, "r5", "g5"));
-	nineTiles.push_back(mots::Tile(sf::Color::White, "r6", "g6"));
+	nineTiles.push_back(mots::Tile(sf::Color::White));
+	nineTiles.push_back(mots::Tile(mots::tileGrey));
+	nineTiles.push_back(mots::Tile(sf::Color::White));
 
-	nineTiles.push_back(mots::Tile(mots::tileGrey, "r7", "g7"));
-	nineTiles.push_back(mots::Tile(sf::Color::White, "r8", "g8"));
-	nineTiles.push_back(mots::Tile(mots::tileGrey, "r9", "g9"));
+	nineTiles.push_back(mots::Tile(mots::tileGrey));
+	nineTiles.push_back(mots::Tile(sf::Color::White));
+	nineTiles.push_back(mots::Tile(mots::tileGrey));
 
     //set the position of each tile
 	//first row

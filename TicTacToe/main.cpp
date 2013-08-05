@@ -13,7 +13,7 @@ int main()
 	//find out how big to make the window
 	sf::VideoMode desktopSize = sf::VideoMode::getDesktopMode();
 	//make the main window for the game
-	sf::RenderWindow window(sf::VideoMode(800, 600, desktopSize.bitsPerPixel), "Music of the Squares", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(800, 600, desktopSize.bitsPerPixel), "TicTacToe", sf::Style::Fullscreen);
 	window.setFramerateLimit(60);
 
 //initialize the GameBoard, which holds both Tiles and sf::RectangleShape borders
