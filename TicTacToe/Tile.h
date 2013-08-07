@@ -31,7 +31,7 @@ namespace mots{
 		sf::Vector2f getPosition();
 
 		//ask if the Tile contains a given point
-		bool contains(float x, float y);
+		bool contains(int x, int y);
 
 		//pass a copy of the private tileFace -- hopefully this lets the sf::RenderWindow draw and display it
 		sf::RectangleShape getTileFace();

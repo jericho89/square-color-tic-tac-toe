@@ -93,9 +93,9 @@ sf::RectangleShape mots::Tile::getTileFace()
 	return tileFace;
 };
 
-bool mots::Tile::contains(float x, float y){
-	sf::FloatRect boundary = tileFace.getGlobalBounds();
-	return (boundary.contains(x, y));
+bool mots::Tile::contains(int x, int y){
+	sf::FloatRect boundary = (tileFace.getGlobalBounds());
+	return (boundary.contains(float(x), float(y)));
 
 }
 

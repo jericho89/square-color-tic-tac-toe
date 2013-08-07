@@ -3,7 +3,6 @@
 #include "Tile.h"
 #include "SFML\Graphics.hpp"
 #include <vector>
-#include <list>
 
 namespace mots {
 
@@ -11,6 +10,9 @@ namespace mots {
 	public:
 		std::vector<mots::Tile> nineTiles;
 		std::vector<sf::RectangleShape> blackBorders;
+		sf::RectangleShape windowDressingLeft;
+		sf::RectangleShape windowDressingRight;
+
 		GameBoard();
 		void makeComputerMove();
 		bool isHumanTurn();

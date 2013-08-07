@@ -48,6 +48,17 @@ mots::GameBoard::GameBoard(){
 	blackBorders[2].setPosition(100.0, 190.0);
 	blackBorders[3].setPosition(100.0, 390.0);
 
+//initialize the black rectangles for the screen vertical borders
+	windowDressingLeft = sf::RectangleShape(sf::Vector2f(100.0, 600.0));
+	windowDressingLeft.setOutlineThickness(0.0);
+	windowDressingLeft.setFillColor(sf::Color::Black);
+	windowDressingLeft.setPosition(sf::Vector2f(0.0, 0.0));
+
+	windowDressingRight = sf::RectangleShape(sf::Vector2f(100.0, 600.0));
+	windowDressingRight.setOutlineThickness(0.0);
+	windowDressingRight.setFillColor(sf::Color::Black);
+	windowDressingRight.setPosition(sf::Vector2f(700.0, 0.0));
+
 //the player moves first:
 	humanTurn = true;
 //initialize winner
