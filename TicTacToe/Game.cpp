@@ -6,20 +6,32 @@
 #include "SFML\System\Clock.hpp"
 
 mots::Game::Game(): window(sf::VideoMode(800, 600), "TicTacToe", sf::Style::Fullscreen){
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 //initialize the GameBoard, which holds both Tiles and sf::RectangleShape borders
 	mots::GameBoard gameBoard;
 };
 
 void mots::Game::run(){
 	sf::Clock clock;
-
+	clock.restart();
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	sf::Time accumulator = sf::Time::Zero;
+	sf::Time fixedTimeStep = sf::seconds((1.0f / 30.0f));
 	while (window.isOpen()){
-	
+		//handle user input
 		processEvents();
-
 		
-		update();
+		//update the game board at a fixed rate
+		//the main loop 'produces' time & the update function 'consumes' it in discrete chunks
+		//should produce a steady 30 frames per second
+		timeSinceLastUpdate = clock.getElapsedTime();
+		accumulator += timeSinceLastUpdate;
+		while (accumulator > fixedTimeStep){
+			accumulator -= fixedTimeStep;
+			update(fixedTimeStep);
+			clock.restart();
+
+		}
 
 		render();
 
@@ -59,7 +71,7 @@ void mots::Game::processEvents(){
 
 };
 
-void mots::Game::update(){
+void mots::Game::update(sf::Time deltaTime){
 		if (gameBoard.isGameOver()){
 			if (gameBoard.doomsDayClock.getElapsedTime().asSeconds() >= 5){gameBoard.resetBoard();}
 		}

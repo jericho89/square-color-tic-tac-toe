@@ -16,11 +16,8 @@ namespace mots {
 
 	private:
 		void processEvents();
-		void update();
+		void update(sf::Time deltaTime);
 		void render();
-
-		sf::Clock clock;
-		sf::Time timeSinceLastUpdate;
 
 		sf::RenderWindow window;
 		mots::GameBoard gameBoard;
