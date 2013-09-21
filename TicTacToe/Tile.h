@@ -33,8 +33,8 @@ namespace mots{
 		//ask if the Tile contains a given point
 		bool contains(int x, int y);
 
-		//return a copy of the drawable sf::Rectangle -- maybe this should be const by reference instead
-		sf::RectangleShape getTileFace();
+		//return a const reference to the TileFace, mainly so it can be drawn in the RenderWindow -- but not modified
+		const sf::RectangleShape& getTileFace();
 		//void playSound();
 
 		sf::Color getCurrentColor();

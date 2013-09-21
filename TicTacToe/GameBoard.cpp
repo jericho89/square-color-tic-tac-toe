@@ -1,7 +1,7 @@
 #include "GameBoard.h"
 #include "SFML\Graphics.hpp"
 #include <vector>
-#include <algorithm>
+
 
 mots::GameBoard::GameBoard(){
 	//build the game board vector and initialize all 9 tiles
@@ -187,9 +187,10 @@ void mots::GameBoard::makeComputerMove()
 	//block: does the player have 2 in a row? is there a Nobody space in that row? pick it
 	if (tryBlock()) return;
 	
-	//fork: if two of your marked rows intersect, and they do not contain a Player cell, pick the tile at the intersection
-
-	//block opponent's fork: if two enemy rows intersect, and they are not blocked, pick a tile next to one of your cells & in an un-blocked row
+	//fork: for each open tile, consider its lanes. if 2 are not marked by the Player AND already contain a Computer tile, take it
+	if (tryFork()) return;
+	//block opponent's fork: for now, try to foil the 3-corners fork
+	if (tryBlockFork()) return;
 	//block fork 2: look for where an enemy would fork(????), and take that tile
 
 	//center: if center not taken, take it
@@ -283,6 +284,63 @@ bool mots::GameBoard::tryBlock(){
 		}
 	}
 	//if you didn't find anything, return false
+	return false;
+};
+
+bool mots::GameBoard::tryFork(){
+//fork: for each open tile, consider its lanes. if 2 are not marked by the Player AND already contain a Computer tile, take it
+
+	for(mots::Tile currentTile : nineTiles){
+
+		//only consider unclaimed tiles
+		if (currentTile.getOwner() == mots::Tile::Owner::Nobody){
+
+			//find the lanes of this tile and put them in a new vector
+			std::vector<std::vector<mots::Tile*>*> lanesOfThisTile;
+			for(std::vector<mots::Tile*>* i : allTheLanes){
+				//if this lane has a pointer to the thing pointed to by currentTile, add it to lanesOfThisTile for analysis
+				for(int j = 0; j > 2; j++){
+					if ( (i->at(j)) == &currentTile) lanesOfThisTile.push_back(i);
+				}
+			}
+
+			//see if 2 lanesOfThisTile contain Computer tiles and are open
+			int countOfViableLanes = 0;
+			//in each lane, 
+			for(std::vector<mots::Tile*>* k : lanesOfThisTile){
+				bool hasAComputerTile;
+				bool isNotBlocked;
+				//is each tile a Computer tile?
+				for(mots::Tile* m : *k){
+					if ((m)->getOwner() == mots::Tile::Owner::Computer) hasAComputerTile = true;
+					else if ((m)->getOwner() == mots::Tile::Owner::Player) isNotBlocked = false;
+				}
+				countOfViableLanes++;
+			}
+
+			//if there are 2+ viable lanes, pick this tile
+			if (countOfViableLanes >= 2){
+				currentTile.setOwner(mots::Tile::Computer);
+				return true;
+			}
+
+		}
+
+	}
+	return false;
+};
+
+bool mots::GameBoard::tryBlockFork(){
+	//if the human has 2 corners, try to take an unblocked side
+	int countPlayerCorners = 0;
+	if (nineTiles[0].getOwner() == mots::Tile::Player) countPlayerCorners++;
+	if (nineTiles[2].getOwner() == mots::Tile::Player) countPlayerCorners++;
+	if (nineTiles[6].getOwner() == mots::Tile::Player) countPlayerCorners++;
+	if (nineTiles[8].getOwner() == mots::Tile::Player) countPlayerCorners++;
+
+	if (countPlayerCorners == 2){
+		if (tryTakeEmptySide()) return true;
+	}
 	return false;
 };
 

@@ -3,9 +3,10 @@
 #ifndef GAME_H
 #define GAME_H
 #include "Tile.h"
+#include "GameBoard.h"
 #include "SFML\Graphics.hpp"
 #include <vector>
-#include "GameBoard.h"
+
 
 namespace mots {
 

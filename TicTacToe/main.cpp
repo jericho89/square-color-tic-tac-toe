@@ -1,11 +1,5 @@
 
-#include <vector>
-#include "SFML\Graphics.hpp"
-#include "Tile.h"
-#include "GameBoard.h"
-#include "SFML\System\Clock.hpp"
 #include "Game.h"
-
 
 
 int main(){

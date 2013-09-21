@@ -89,7 +89,7 @@ sf::Vector2f mots::Tile::getPosition()
 
  return position;
 };
-sf::RectangleShape mots::Tile::getTileFace()
+const sf::RectangleShape& mots::Tile::getTileFace()
 {
 	return tileFace;
 };
