@@ -120,7 +120,7 @@ bool mots::GameBoard::isHumanTurn()
 
 bool mots::GameBoard::isGameOver()
 {
-	//if the player got 3 in a row
+	//if the player got 3 in a row:
 	//for each each lane,
 	for (int i = 0; i < 8; i ++){
 		std::vector<mots::Tile*> * currentLane = (allTheLanes[i]);
@@ -130,7 +130,7 @@ bool mots::GameBoard::isGameOver()
 			winner = mots::Tile::Owner::Player;
 			//make the winning squares darker
 			for (int j = 0; j < 3; j++){
-				((allTheLanes[i])->at(j))->setTargetColor(playerGreenWin);
+				((currentLane)->at(j))->setTargetColor(playerGreenWin);
 			}
 			return true;
 		}
@@ -157,10 +157,10 @@ bool mots::GameBoard::isGameOver()
 		//set winner to Nobody
 		//return true
 	int allCount=0;
-	for (int i=0; i < 8; i ++){
+	for (int i=0; i < 9; i ++){
 		if (nineTiles[i].getOwner() != mots::Tile::Owner::Nobody) allCount++;
 	}
-	if (allCount >=8){
+	if (allCount >=9){
 		winner = mots::Tile::Owner::Nobody;
 		return true;
 	}

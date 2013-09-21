@@ -16,7 +16,7 @@ namespace mots {
 
 	private:
 		void processEvents();
-		void update(sf::Time deltaTime);
+		void update();
 		void render();
 
 		sf::RenderWindow window;
