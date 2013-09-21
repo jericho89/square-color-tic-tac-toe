@@ -59,8 +59,6 @@ mots::GameBoard::GameBoard(){
 	windowDressingRight.setFillColor(sf::Color::Black);
 	windowDressingRight.setPosition(sf::Vector2f(700.0, 0.0));
 
-//the player moves first:
-	humanTurn = true;
 //initialize winner
 	winner = mots::Tile::Owner::Nobody;
 
@@ -115,7 +113,14 @@ mots::GameBoard::GameBoard(){
 
 bool mots::GameBoard::isHumanTurn()
 {
-	return humanTurn;
+	//if the tiles are still changing colors, the human player can't make another move
+	for (mots::Tile i : nineTiles){
+		if (i.getCurrentColor() != i.getTargetColor()) return false;
+	}
+
+	//if none of the tiles are still changing, then the human player can move
+	return true;
+
 };
 
 bool mots::GameBoard::isGameOver()
@@ -199,14 +204,12 @@ void mots::GameBoard::makeComputerMove()
 	if(tryTakeEmptySide()) return;
 
 
-	//make it the player's turn again
-	humanTurn = true;
+
 };
 
 void mots::GameBoard::showEndgameColors(mots::Tile::Owner winner)
 {
-	//the player can't click anything until the board resets in GameBoard::resetBoard()
-	humanTurn = false;
+
 	//if winner = Player, set all Tiles targetColor to green
 	for (int i=0; i < 9; i++){
 		if (winner == mots::Tile::Owner::Player){
@@ -235,11 +238,9 @@ void mots::GameBoard::resetBoard()
 	//set all GameBoard member values back to default
 	winner = mots::Tile::Owner::Nobody;
 
-	//and let the player click again
-	humanTurn = true;
+
 };
 
-void mots::GameBoard::setHumanTurn(bool isHumanTurn){(this->humanTurn) = isHumanTurn;};
 
 mots::Tile::Owner mots::GameBoard::whoWon(){return winner;};
 

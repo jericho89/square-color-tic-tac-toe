@@ -19,13 +19,12 @@ namespace mots {
 		bool isGameOver();
 		void showEndgameColors(mots::Tile::Owner winner);
 		void resetBoard();
-		void setHumanTurn(bool isHumanTurn);
 		mots::Tile::Owner whoWon();
 		sf::Clock doomsDayClock;
 
 
 	private:
-		bool humanTurn;
+
 		mots::Tile::Owner winner;
 
 		std::vector<mots::Tile*> columnA;

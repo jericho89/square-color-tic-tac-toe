@@ -37,6 +37,7 @@ namespace mots{
 		sf::RectangleShape getTileFace();
 		//void playSound();
 
+		sf::Color getCurrentColor();
 		sf::Color getTargetColor();
 
 		private:

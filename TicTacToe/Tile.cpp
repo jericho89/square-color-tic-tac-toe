@@ -25,6 +25,7 @@ mots::Tile::Tile(sf::Color baseColor)
 
 //color manipulation
 
+
 void mots::Tile::setTargetColor(sf::Color targetColor)
 {
 	this->targetColor = targetColor;
@@ -100,3 +101,5 @@ bool mots::Tile::contains(int x, int y){
 }
 
 sf::Color mots::Tile::getTargetColor(){return targetColor;};
+
+sf::Color mots::Tile::getCurrentColor(){return (tileFace.getFillColor());};
