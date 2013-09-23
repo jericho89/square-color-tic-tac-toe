@@ -35,7 +35,6 @@ namespace mots{
 
 		//return a const reference to the TileFace, mainly so it can be drawn in the RenderWindow -- but not modified
 		const sf::RectangleShape& getTileFace();
-		//void playSound();
 
 		sf::Color getCurrentColor();
 		sf::Color getTargetColor();

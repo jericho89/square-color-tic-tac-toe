@@ -308,14 +308,10 @@ bool mots::GameBoard::tryFork(){
 			int countOfViableLanes = 0;
 			//in each lane, 
 			for(std::vector<mots::Tile*>* k : lanesOfThisTile){
-				bool hasAComputerTile;
-				bool isNotBlocked;
-				//is each tile a Computer tile?
-				for(mots::Tile* m : *k){
-					if ((m)->getOwner() == mots::Tile::Owner::Computer) hasAComputerTile = true;
-					else if ((m)->getOwner() == mots::Tile::Owner::Player) isNotBlocked = false;
-				}
+				//if it contains computer tiles and does not contain player tiles, count it as a viable lane for forking
+				if ((numberOfComputerTiles(*k) > 0) && (numberOfPlayerTiles(*k) == 0)){
 				countOfViableLanes++;
+				}
 			}
 
 			//if there are 2+ viable lanes, pick this tile
