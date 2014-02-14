@@ -14,16 +14,7 @@ namespace mots {
 
 	class GameBoard {
 	public:
-		std::vector<mots::Tile> nineTiles;
-		//The SFML class RectangleShape represents a rectangle that can be drawn to the RenderWindow, with fill and border colors, etc.
-		//The blackBorders form a grid over the game-board.
-		std::vector<sf::RectangleShape> blackBorders;
-		//These two rectangles mask the left and right sides of the screen.
-		sf::RectangleShape windowDressingLeft;
-		sf::RectangleShape windowDressingRight;
-
-		//The doomsDayClock is used at the end of the game to ensure that the end-of-game animations have enough time to run.
-		sf::Clock doomsDayClock;
+		
 
 		GameBoard();
 		void makeComputerMove();
@@ -78,10 +69,18 @@ namespace mots {
 		bool tryTakeOppositeCorner();
 		bool tryTakeEmptyCorner();
 		bool tryTakeEmptySide();
-
-
+		bool tryTakeRandomSequence(int i, int j, int k, int l);
 		
+		std::vector<mots::Tile> nineTiles;
+		//The SFML class RectangleShape represents a rectangle that can be drawn to the RenderWindow, with fill and border colors, etc.
+		//The blackBorders form a grid over the game-board.
+		std::vector<sf::RectangleShape> blackBorders;
+		//These two rectangles mask the left and right sides of the screen.
+		sf::RectangleShape windowDressingLeft;
+		sf::RectangleShape windowDressingRight;
 
+		//The doomsDayClock is used at the end of the game to ensure that the end-of-game animations have enough time to run.
+		sf::Clock doomsDayClock;
 		
 	
 	};

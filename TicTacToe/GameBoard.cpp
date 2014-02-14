@@ -1,6 +1,7 @@
 #include "GameBoard.h"
 #include "SFML\Graphics.hpp"
 #include <vector>
+#include <random>
 
 
 mots::GameBoard::GameBoard(){
@@ -108,8 +109,6 @@ mots::GameBoard::GameBoard(){
 		 allTheLanes.push_back(&(diagonalA));
 		 allTheLanes.push_back(&(diagonalB));
 
-
-
 };
 
 bool mots::GameBoard::isHumanTurn()
@@ -194,8 +193,6 @@ void mots::GameBoard::makeComputerMove()
 	//This is where the AI analyzes the board and picks a Tile.
 	//To make its choice, it works through a simple flow-chart. If a high-priority move is not available, it moves on to
 	//a less appealing move. This strategy is based on the summary of Tic-Tac-Toe strategy found at http://en.wikipedia.org/wiki/Tic-tac-toe#Strategy.
-
-
 
 
 	//Win: Do you have 2 in a row? Is there an empty space in that row? Pick it.
@@ -372,28 +369,35 @@ bool mots::GameBoard::tryTakeCenter(){
 	return false;
 };
 
-bool mots::GameBoard::tryTakeEmptyCorner(){
+bool mots::GameBoard::tryTakeRandomSequence(int i, int j, int k, int l){
+	
+	int accessOrder[4] = {i, j, k, l};
+	std::random_shuffle(std::begin(accessOrder), std::end(accessOrder));
 
-	//Try the top left corner.
-		if (nineTiles[0].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[0].setOwner(mots::Tile::Owner::Computer);
+
+
+
+
+	//Try the first tile.
+		if (nineTiles[accessOrder[0]].getOwner() == mots::Tile::Owner::Nobody){
+			nineTiles[accessOrder[0]].setOwner(mots::Tile::Owner::Computer);
 			return true;
 		}
-	//Try the top right corner.
-		if (nineTiles[2].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[2].setOwner(mots::Tile::Owner::Computer);
+	//Try the second tile.
+		if (nineTiles[accessOrder[1]].getOwner() == mots::Tile::Owner::Nobody){
+			nineTiles[accessOrder[1]].setOwner(mots::Tile::Owner::Computer);
 			return true;
 		}
 
-	//Try the bottom left corner.
-		if (nineTiles[6].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[6].setOwner(mots::Tile::Owner::Computer);
+	//Try the third tile.
+		if (nineTiles[accessOrder[2]].getOwner() == mots::Tile::Owner::Nobody){
+			nineTiles[accessOrder[2]].setOwner(mots::Tile::Owner::Computer);
 			return true;
 		}
 
-	//Try the bottom right corner.
-		if (nineTiles[8].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[8].setOwner(mots::Tile::Owner::Computer);
+	//Try the fourth tile.
+		if (nineTiles[accessOrder[3]].getOwner() == mots::Tile::Owner::Nobody){
+			nineTiles[accessOrder[3]].setOwner(mots::Tile::Owner::Computer);
 			return true;
 		}
 
@@ -402,32 +406,15 @@ bool mots::GameBoard::tryTakeEmptyCorner(){
 return false;
 };
 
+bool mots::GameBoard::tryTakeEmptyCorner(){
+	return tryTakeRandomSequence(0, 2, 6, 8);
+
+};
+
 bool mots::GameBoard::tryTakeEmptySide(){
-
-	//Try the top side.
-		if (nineTiles[1].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[1].setOwner(mots::Tile::Owner::Computer);
-			return true;
-		}
-	//Try the right side.
-		if (nineTiles[5].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[5].setOwner(mots::Tile::Owner::Computer);
-			return true;
-		}
-
-	//Try the bottom side.
-		if (nineTiles[7].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[7].setOwner(mots::Tile::Owner::Computer);
-			return true;
-		}
-
-	//Try the left side.
-		if (nineTiles[3].getOwner() == mots::Tile::Owner::Nobody){
-			nineTiles[3].setOwner(mots::Tile::Owner::Computer);
-			return true;
-		}
-
-return false;
+	int accessOrder[] = {1, 3, 5, 7};
+	return tryTakeRandomSequence(1, 3, 5, 7);
+	
 };
 
 bool mots::GameBoard::tryTakeOppositeCorner(){

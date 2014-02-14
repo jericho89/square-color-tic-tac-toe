@@ -3,7 +3,7 @@
 
 
 namespace mots{
-	Application::Application():window(sf::VideoMode(800, 600), "TicTacToe", sf::Style::Default),
+	Application::Application():window(sf::VideoMode(800, 600), "gridlock", sf::Style::Default),
 	stateStack(State::Context(window, scores[0]))
 {
 	scores[0] = 0;
