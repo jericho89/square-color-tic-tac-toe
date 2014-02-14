@@ -42,6 +42,7 @@ namespace mots {
 
 		void draw(sf::RenderWindow& window);
 		void update(sf::Time dt);
+		void handleEvent(const sf::Event& event);
 
 
 	private:

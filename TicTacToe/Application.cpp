@@ -3,7 +3,7 @@
 
 
 namespace mots{
-Application::Application():window(sf::VideoMode(800, 600), "TicTacToe", sf::Style::Fullscreen),
+	Application::Application():window(sf::VideoMode(800, 600), "TicTacToe", sf::Style::Default),
 	stateStack(State::Context(window, scores[0]))
 {
 	scores[0] = 0;
@@ -52,6 +52,7 @@ void Application::update(sf::Time dt){
 };
 
 void Application::draw(){
+	window.clear(sf::Color::White);
 	stateStack.draw();
 };
 void Application::processEvents(){

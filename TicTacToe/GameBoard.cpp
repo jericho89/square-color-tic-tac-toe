@@ -517,3 +517,26 @@ void mots::GameBoard::update(sf::Time dt){
 	}
 
 };
+
+void mots::GameBoard::handleEvent(const sf::Event& event){
+	//Left click in the window during the player's turn:
+	if ((event.type == sf::Event::MouseButtonPressed && (event.mouseButton.button == sf::Mouse::Button::Left)) && isHumanTurn()){
+
+		//If the left click was on an unclaimed tile, make it green:
+		for(int i=0; i < 9; i++){
+			if ((nineTiles[i].contains((event.mouseButton.x), event.mouseButton.y)) && (nineTiles[i].getOwner() == mots::Tile::Owner::Nobody)){
+				nineTiles[i].setOwner(mots::Tile::Owner::Player);
+				if (calculateGameOver()){
+					showEndgameColors(whoWon());
+					doomsDayClock = sf::Clock();
+				}
+				else makeComputerMove();
+
+				if (calculateGameOver()){
+					showEndgameColors(whoWon());
+					doomsDayClock = sf::Clock();
+				}
+			}
+		}
+	}
+};

@@ -13,7 +13,6 @@ public:
 	bool handleEvent(const sf::Event& event);
 
 private:
-	void updateScore(mots::Tile::Owner winner);
 
 	mots::GameBoard gameBoard;
 
