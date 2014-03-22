@@ -16,6 +16,8 @@ private:
 	void draw();
 	void processEvents();
 
+	void takeScreenshot();
+
 
 
 sf::RenderWindow window;

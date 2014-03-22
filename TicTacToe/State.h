@@ -1,5 +1,4 @@
-//This state machine is lifted from the tutorial book SFML Game Development by Moreira, Hansson, and Haller. Its purpose is to let the application transition between
-//a TitleState, the main GameState, and an EndState.
+//This state machine is lifted from the tutorial book SFML Game Development by Moreira, Hansson, and Haller.
 #ifndef STATE_H
 #define STATE_H
 #include <memory>

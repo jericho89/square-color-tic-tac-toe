@@ -61,9 +61,21 @@ void Application::processEvents(){
 	sf::Event event;
 	while (window.pollEvent(event)){
 
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::P) {
+			takeScreenshot();
+		}
 		stateStack.handleEvent(event);
 
 
 	}
+};
+
+void Application::takeScreenshot(){
+	sf::Image capture = window.capture();
+	capture.saveToFile("screenshot.png");
+	
+
+
+
 };
 }
