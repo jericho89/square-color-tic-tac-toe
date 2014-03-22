@@ -5,6 +5,6 @@
 
 
 namespace States{
-enum ID {Game};
+enum ID {Game, Title};
 };
 #endif

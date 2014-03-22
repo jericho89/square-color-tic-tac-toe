@@ -36,16 +36,56 @@ mots::Tile::Tile(sf::Color baseColor, sf::Vector2f size){
 };
 
 
+void mots::Tile::setBaseColor(sf::Color baseColor){
+	this->originalColor = baseColor;
+	targetColor = baseColor;
+};
+
+void mots::Tile::buildAnimation(){
+	auto stepWithFloor = [] (int target, int current) {
+		int step;
+		if (target == current) return 0;
+
+		step = (target-current)/NUMBER_FRAMES;
+		if (step == 0) step = (target > current? 1 : -1);
+		return step;
+
+	};
+
+	auto direction = [] (int step) {
+		if (step >= 0) return true;
+		else return false;
+	};
+
+	sf::Color currentColor = getCurrentColor();
+	animation.r = stepWithFloor(targetColor.r, currentColor.r);
+	animation.rDirection = direction(animation.r);
+
+	animation.g = stepWithFloor(targetColor.g, currentColor.g);
+	animation.gDirection = direction(animation.g);
+
+	animation.b = stepWithFloor(targetColor.b, currentColor.b);
+	animation.bDirection = direction(animation.b);
+
+	animation.a = stepWithFloor(targetColor.a, currentColor.a);
+	animation.aDirection = direction(animation.a);
+
+
+
+};
 
 void mots::Tile::setTargetColor(sf::Color targetColor)
 {
 	this->targetColor = targetColor;
+	buildAnimation();
+	frameCount = 0;
+
 }
 
 
 //updateColor() pushes the color of the Tile one step closer to its target. If the color is already on-target, or
 //this update brings it on-target, it returns true.
-bool mots::Tile::updateColor()
+/*bool mots::Tile::updateColor()
 {
 	sf::Color currentColor = tileFace.getFillColor();
 	if (currentColor == targetColor) return true;
@@ -66,6 +106,36 @@ bool mots::Tile::updateColor()
 		return true;
 	else
 		return false;
+
+}; */
+
+
+bool mots::Tile::updateColor(){
+
+	//if it's already time to end the animation, abort!
+
+	sf::Color currentColor = getCurrentColor();
+	if (currentColor == targetColor) return true;
+
+
+	//otherwise, animate...
+	sf::Color intermediate;	
+	auto smartStep = [] (int frame, bool direction, int target, int current) {
+		//outputs the resultant value
+		if (current == target) return target;
+		if (direction && ((current + frame) > target)) return target;
+		if ((!direction) && ((current + frame) < target)) return target;
+		return (current + frame);
+	};
+	intermediate.r = smartStep(animation.r, animation.rDirection, targetColor.r, currentColor.r);
+	intermediate.g = smartStep(animation.g, animation.gDirection, targetColor.g, currentColor.g);
+	intermediate.b = smartStep(animation.b, animation.bDirection, targetColor.b, currentColor.b);
+	intermediate.a = smartStep(animation.a, animation.aDirection, targetColor.a, currentColor.a);
+	frameCount++;
+
+	tileFace.setFillColor(intermediate);
+	return false;
+
 
 };
 

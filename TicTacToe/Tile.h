@@ -9,6 +9,8 @@
 
 namespace mots{
 
+
+
 	//SFML's Color class represents a color with Red, Green, Blue, and Alpha.
 	static const sf::Color tileGrey = sf::Color(222, 217, 219, 255);
 	static const sf::Color playerGreen = sf::Color(50, 255, 50, 220);
@@ -16,18 +18,21 @@ namespace mots{
 	static const sf::Color enemyRed = sf::Color(255, 50, 50, 220);
 	static const sf::Color enemyRedWin = sf::Color(255, 0, 0, 255);
 	static const sf::Color nobodyWinGrey = sf::Color(120, 120, 120, 255);
+	static const sf::Color darkGrey = sf::Color(50, 50, 50, 255);
 	class Tile {
 
 		public:
 		static const enum Owner {Player, Computer, Nobody};
 		//Constructor: the parameter is the Tile's true color -- when the board is reset, it will have this color again.
-		Tile(sf::Color baseColor);
+		Tile(sf::Color baseColor = sf::Color::Black);
 
 		//2nd constructor: variable size!
 		Tile(sf::Color baseColor, sf::Vector2f size);
 
 
-		
+
+
+		void setBaseColor(sf::Color baseColor);
 		void setTargetColor(sf::Color targetColor);
 		//A Tile is always trying to match its targetColor. Every time updateColor() is called by the main game loop,
 		//the actual color of the sf::RectangleShape is set a little closer to the target.
@@ -49,10 +54,24 @@ namespace mots{
 		sf::Color getTargetColor();
 
 		private:
+		static const int NUMBER_FRAMES = 60;
+		struct ColorFrame{
+			int r;
+			bool rDirection;
+			int g;
+			bool gDirection;
+			int b;
+			bool bDirection;
+			int a;
+			bool aDirection;
+			
+		};
+		ColorFrame animation;
+		int frameCount;
 		sf::Color originalColor;
 		sf::Color targetColor;
 		Owner owner;
-
+		void buildAnimation();
 	protected:
 		sf::RectangleShape tileFace;
 		

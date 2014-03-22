@@ -113,12 +113,7 @@ mots::GameBoard::GameBoard(){
 
 bool mots::GameBoard::isHumanTurn()
 {
-	//If the tiles are still changing colors, the human player can't make another move.
-	for (mots::Tile i : nineTiles){
-		if (i.getCurrentColor() != i.getTargetColor()) return false;
-	}
-
-	//If none of the tiles are still changing, then the human player can make a move.
+	if (isGameOver()) return false;
 	return true;
 
 };
@@ -496,7 +491,7 @@ void mots::GameBoard::draw(sf::RenderWindow& window){
 void mots::GameBoard::update(sf::Time dt){
 
 	if (isGameOver()){
-		if (doomsDayClock.getElapsedTime().asSeconds() >= 5){resetBoard();}
+		if (doomsDayClock.getElapsedTime().asSeconds() >= 3){resetBoard();}
 	}
 
 	for(int i=0; i<9; i++){
@@ -515,7 +510,9 @@ void mots::GameBoard::handleEvent(const sf::Event& event){
 				nineTiles[i].setOwner(mots::Tile::Owner::Player);
 				if (calculateGameOver()){
 					showEndgameColors(whoWon());
+					if(whoWon() == mots::Tile::Owner::Nobody) nineTiles[i].setTargetColor(mots::darkGrey);
 					doomsDayClock = sf::Clock();
+					return;
 				}
 				else makeComputerMove();
 

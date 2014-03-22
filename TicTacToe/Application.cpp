@@ -1,20 +1,22 @@
 #include "Application.h"
 #include "GameState.h"
-
+#include "TitleState.h"
 
 namespace mots{
-	Application::Application():window(sf::VideoMode(800, 600), "gridlock", sf::Style::Default),
+	Application::Application():window(sf::VideoMode(800, 600), "grid-lock", sf::Style::Fullscreen),
 	stateStack(State::Context(window, scores[0]))
 {
 	scores[0] = 0;
 	scores[1] = 0;
 	scores[2] = 0;
 	registerStates();
-	stateStack.pushState(States::ID::Game);
+	stateStack.pushState(States::ID::Title);
 };
 
 void Application::registerStates(){
+	stateStack.registerState<TitleState>(States::Title);
 	stateStack.registerState<GameState>(States::Game);
+
 
 };
 

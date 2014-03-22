@@ -1,5 +1,5 @@
 //This state machine is lifted from the tutorial book SFML Game Development by Moreira, Hansson, and Haller. Its purpose is to let the application transition between
-//a TitleState, the main GameState, and a EndState.
+//a TitleState, the main GameState, and a EndState. I decided I don't want any of those for this -- I prefer the simple, unexplained board -- but it'll come in handy later.
 
 #ifndef STATESTACK_H
 #define STATESTACK_H

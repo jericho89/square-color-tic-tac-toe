@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TicTacToe", "TicTacToe\TicTacToe.vcxproj", "{CC86AFE1-FEF4-43A6-99C5-0C1D20BA204F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "grid-lock", "TicTacToe\TicTacToe.vcxproj", "{CC86AFE1-FEF4-43A6-99C5-0C1D20BA204F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
